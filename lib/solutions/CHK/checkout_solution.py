@@ -32,8 +32,9 @@ def checkout(skus: str) -> int:
         if item not in offers:
             continue
         biggest_saving = 0
+        normal_price = products[item]
         for (offer_quantity, offer_price) in offers[item].items():
-            saving = (basket_amount // offer_quantity) * offer_price
+            saving = (basket_amount * normal_price) - (basket_amount // offer_quantity) * offer_price
             if saving > biggest_saving:
                 biggest_saving = saving
         total_price -= biggest_saving
@@ -46,4 +47,5 @@ def valid(skus: str, products: dict) -> bool:
         if sku not in products:
             return False
     return True
+
 
