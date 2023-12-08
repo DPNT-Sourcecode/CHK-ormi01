@@ -23,15 +23,20 @@ def checkout(skus: str) -> int:
     # want to find the total_price
     total_price = 0
     for item in basket:
-        if item not in basket:
-            continue
         normal_price = products[item]
         basket_amount = basket[item]
-        if (item in offers):
-            (offer_quantity, offer_price) = [(k ,v) for k, v in offers[item].items()][0]
-            total_price += (basket_amount // offer_quantity) * offer_price + (basket_amount % offer_quantity) * normal_price
-        else:
-            total_price += basket_amount * normal_price
+        total_price += basket_amount * normal_price
+
+    # apply offers
+    for item in basket:
+        if item not in offers:
+            continue
+        biggest_saving = 0
+        for (offer_quantity, offer_price) in offers[item].items():
+            saving = (basket_amount // offer_quantity) * offer_price
+            if saving > biggest_saving:
+                biggest_saving = saving
+        total_price -= biggest_saving
 
     return total_price
 
