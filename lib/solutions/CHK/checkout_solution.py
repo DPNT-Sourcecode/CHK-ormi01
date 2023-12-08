@@ -10,7 +10,7 @@ def checkout(skus: str) -> int:
         return -1
 
     # offers
-    offers = {"A": {3: 130, 5: 200}, "B": {2: 45}}
+    offers = {"A": {3: 130, 5: 200}, "B": {2: 45}, "E": {2: 30}}
 
     # iterate through string storing quantities
     basket = {}
@@ -41,3 +41,4 @@ def valid(skus: str, products: dict) -> bool:
         if sku not in products:
             return False
     return True
+
