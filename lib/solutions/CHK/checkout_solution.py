@@ -3,14 +3,14 @@
 # skus = unicode string
 def checkout(skus: str) -> int:
     # list of products and their prices
-    products = {"A": 50, "B": 30, "C": 20, "D": 15}
+    products = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40}
 
     # validate
     if not valid(skus, products):
         return -1
 
     # offers
-    offers = {"A": {3: 130}, "B": {2: 45}}
+    offers = {"A": {3: 130, 5: 200}, "B": {2: 45}}
 
     # iterate through string storing quantities
     basket = {}
