@@ -13,4 +13,3 @@ class TestSum():
     def test_sum_with_invalid_both(self):
         with pytest.raises(ValueError) as value_error:
             sum_solution.compute(-1, -1)
-
