@@ -13,3 +13,5 @@ class TestChk():
         assert checkout_solution.checkout("AAABB") == 175
     def test_with_c(self):
         assert checkout_solution.checkout("C") == 20
+    def test_invalid(self):
+        assert checkout_solution.checkout("a") == -1

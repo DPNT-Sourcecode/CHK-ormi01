@@ -5,6 +5,10 @@ def checkout(skus: str) -> int:
     # list of products and their prices
     products = {"A": 50, "B": 30, "C": 20, "D": 15}
 
+    # validate
+    if not valid(skus, products):
+        return -1
+
     # offers
     offers = {"A": {3: 130}, "B": {2: 45}}
 
@@ -32,7 +36,7 @@ def checkout(skus: str) -> int:
     return total_price
 
 
-def validate(skus: str, products: dict) -> bool:
+def valid(skus: str, products: dict) -> bool:
     for sku in skus:
         if sku not in products:
             return False
