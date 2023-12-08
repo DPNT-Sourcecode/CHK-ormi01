@@ -2,32 +2,36 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str) -> int:
-    # validate
-    if not validate(skus):
-        return -1
-    
-    # dictionary of prices containing offers too
-    price = {}
-    price["A"]["offer"][3] = 130 
-    price["A"]["price"] = 50
-    price["B"]["offer"][2] = 45
-    price["B"]["price"] = 30
-    price["C"]["price"] = 20
-    price["D"]["price"] = 15
+    # list of products and their prices
+    products = {"A": 50, "B": 30, "C": 20, "D": 15}
 
-    # create a dictionary to represent basket
+    # offers
+    offers = {"A": {3: 130}, "B": {2: 45}}
+
+    # iterate through string storing quantities
     basket = {}
-    for item in skus:
-        if item in basket:
-            basket[item] = 0
+    for sku in skus:
+        if sku not in basket:
+            basket[sku] = 0
         else:
-            basket[item] += 1
+            basket[sku] += 1
 
-    # now want to apply offers
+    # want to find the total_price
+    total_price = 0
     for item in basket:
-        # see if there is enough offers 
+        print(item)
+        if item not in basket:
+            continue
+        normal_price = products[item]
+        basket_amount = basket[item]
+        (offer_quantity, offer_price) = [(k ,v) for k, v in offers[item].items()][0]
+        total_price += (basket_amount // offer_quantity) * offer_price + (basket_amount % offer_quantity) * normal_price
+
+    return total_price
 
 
-
-def validate(skus: str) -> bool:
+def validate(skus: str, products: dict) -> bool:
+    for sku in skus:
+        if sku not in products:
+            return False
     return True
