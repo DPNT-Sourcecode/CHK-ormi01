@@ -23,8 +23,11 @@ def checkout(skus: str) -> int:
             continue
         normal_price = products[item]
         basket_amount = basket[item]
-        (offer_quantity, offer_price) = [(k ,v) for k, v in offers[item].items()][0]
-        total_price += (basket_amount // offer_quantity) * offer_price + (basket_amount % offer_quantity) * normal_price
+        if (item in offers):
+            (offer_quantity, offer_price) = [(k ,v) for k, v in offers[item].items()][0]
+            total_price += (basket_amount // offer_quantity) * offer_price + (basket_amount % offer_quantity) * normal_price
+        else:
+            total_price += basket_amount * normal_price
 
     return total_price
 

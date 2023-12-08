@@ -11,3 +11,5 @@ class TestChk():
         assert checkout_solution.checkout("BBB") == 75
     def test_with_combination(self):
         assert checkout_solution.checkout("AAABB") == 175
+    def test_with_c(self):
+        assert checkout_solution.checkout("C") == 20
