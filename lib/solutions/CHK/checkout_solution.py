@@ -12,14 +12,13 @@ def checkout(skus: str) -> int:
     basket = {}
     for sku in skus:
         if sku not in basket:
-            basket[sku] = 0
+            basket[sku] = 1
         else:
             basket[sku] += 1
 
     # want to find the total_price
     total_price = 0
     for item in basket:
-        print(item)
         if item not in basket:
             continue
         normal_price = products[item]
