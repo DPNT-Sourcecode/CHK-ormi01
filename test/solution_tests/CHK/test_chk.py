@@ -9,3 +9,5 @@ class TestChk():
         assert checkout_solution.checkout("BB") == 45
     def test_offer_b_with_remainder(self):
         assert checkout_solution.checkout("BBB") == 75
+    def test_with_combination(self):
+        assert checkout_solution.checkout("AAABB") == 175
