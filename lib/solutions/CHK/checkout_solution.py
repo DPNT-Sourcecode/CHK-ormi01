@@ -24,7 +24,7 @@ def checkout(skus: str) -> int:
     # work on the F offer here
     if "F" in basket:
         if basket["F"] >= 3:
-            basket["F"] = max(basket["F"] % 2 - 1, 3)
+            basket["F"] = max(basket["F"] // 2, 3)
 
     # apply offers here
     for sku, amount in basket.items():
@@ -36,3 +36,4 @@ def checkout(skus: str) -> int:
         total_price += amount * prices[sku]
 
     return total_price
+
