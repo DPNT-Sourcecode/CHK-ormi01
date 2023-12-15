@@ -1,4 +1,5 @@
 from solutions.CHK import checkout_solution
+from random import sample
 
 class TestChk():
     def test_offer_a(self):
@@ -28,3 +29,7 @@ class TestChk():
     def test_failed_f(self):
         assert checkout_solution.checkout("FFFF") == 30
         assert checkout_solution.checkout("FFFFFF") == 40
+    def test_new_offer(self):
+        assert checkout_solution.checkout(sample(["S","T","X","Y","Z"], 3)) == 45
+        assert checkout_solution.checkout(sample(["S","T","X","Y","Z"], 6)) == 90
+
