@@ -24,19 +24,22 @@ def checkout(skus: str) -> int:
     # want to work on the new any 3 of (S,T,X,Y,Z) for 45  offer
     # want to work from expensive to cheap (e.g. [XSTZ] = X + 45)
     special_offer_items = sorted(["S","T","X","Y","Z"], key=lambda x: prices[x], reverse=True)
-    count = sum(basket.get(item, 0) for item in special_offer_items)
-    while count >= 3:
-        # Find the three most expensive items that are part of the offer
-        offer_items = []
-        used_items = set()  # Keep track of the items used in this offer
-        for item in special_offer_items:
-            if item in basket and basket[item] > 0 and len(offer_items) < 3 and item not in used_items:
-                offer_items.append(item)
-                used_items.add(item)
-                basket[item] -= 1
-        # Add the offer price to the total
-        total_price += 45  # Price of the special offer
-        count = sum(basket.get(item, 0) for item in special_offer_items)
+
+    for item in special_offer_items:
+        count = basket.get(item, 0)
+        while count >= 3:
+            # Find the three most expensive items that are part of the offer
+            offer_items = []
+            used_items = set()  # Keep track of the items used in this offer
+            for item in special_offer_items:
+                if item in basket and basket[item] > 0 and len(offer_items) < 3 and item not in used_items:
+                    offer_items.append(item)
+                    used_items.add(item)
+                    basket[item] -= 1
+            # Add the offer price to the total
+            total_price += 45  # Price of the special offer
+            count = basket.get(item, 0)
+
 
 
     # apply offers here
@@ -65,7 +68,3 @@ def initialise_basket(prices: dict, offers: dict):
     sorted_basket = {sku: basket[sku] for sku in sorted_keys}
 
     return sorted_basket
-
-
-
-
