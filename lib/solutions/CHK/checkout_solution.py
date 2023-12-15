@@ -42,8 +42,3 @@ def initialise_basket(prices: dict, offers: dict):
     sorted_basket = {sku: basket[sku] for sku in sorted_keys}
 
     return sorted_basket
-
-
-
-
-
