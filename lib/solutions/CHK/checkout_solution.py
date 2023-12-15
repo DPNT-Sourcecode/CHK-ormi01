@@ -4,7 +4,7 @@
 def checkout(skus: str) -> int:
     # define prices and offers
     prices: dict = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10}
-    offers: dict = {"A": [(5, 200), (3, 130)], "B": [(2, 45)]}
+    offers: dict = {"A": [(5, 200), (3, 130)], "B": [(2, 45)], "E": [(2, 0, "B")]}
 
     # initialise basket and the total price
     basket: dict = {}
@@ -36,5 +36,3 @@ def checkout(skus: str) -> int:
         total_price += amount * prices[sku]
 
     return total_price
-
-
