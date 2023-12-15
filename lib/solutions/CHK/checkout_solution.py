@@ -7,9 +7,9 @@ def checkout(skus: str) -> int:
                     "I": 35, "J": 60, "K": 80, "L": 90, "M": 15, "N": 40, "O": 10, "P": 50, 
                     "Q": 30, "R": 50, "S": 30, "T": 20, "U": 40, "V": 50, "W": 20, "X": 90, 
                     "Y": 10, "Z": 50}
-    offers: dict = {"A": [(5, 200), (3, 130)], "E": [(2, 0, "B")], "B": [(2, 45)], "F": [(3, 20)], "H": [(10, 80), (5, 45)],
-                     "K": [(2, 150)], "N": [(3, 0, "M")], "P": [(5, 200)], "Q": [(3, 80)], "R": [(3, 0, "Q")], "U": [(4, 120)], 
-                     "V": [(3, 130), (2, 90)]}
+    offers: dict = {"A": [(5, 200), (3, 130)], "E": [(2, 0, "B")], "B": [(2, 45)], "F": [(3, 20)],
+                     "H": [(10, 80), (5, 45)], "K": [(2, 150)], "N": [(3, 0, "M")], "P": [(5, 200)], 
+                     "Q": [(3, 80)], "R": [(3, 0, "Q")], "U": [(4, 120)], "V": [(3, 130), (2, 90)]}
 
     # initialise basket and the total price
     basket: dict = initialise_basket(prices, offers)
@@ -47,4 +47,5 @@ def initialise_basket(prices: dict, offers: dict):
     sorted_basket = {sku: basket[sku] for sku in sorted_keys}
 
     return sorted_basket
+
 
