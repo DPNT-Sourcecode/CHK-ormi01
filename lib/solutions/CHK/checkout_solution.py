@@ -47,5 +47,3 @@ def valid(skus: str, products: dict) -> bool:
         if sku not in products:
             return False
     return True
-
-
