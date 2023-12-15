@@ -3,7 +3,7 @@
 # skus = unicode string
 def checkout(skus: str) -> int:
     # define prices and offers
-    prices: dict = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40}
+    prices: dict = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10}
     offers: dict = {"A": [(5, 200), (3, 130)], "B": [(2, 45)]}
 
     # initialise basket and the total price
@@ -20,6 +20,11 @@ def checkout(skus: str) -> int:
     # can be proven by induction that 2E->1B > 2B->45
     if "B" in basket and "E" in basket:
         basket["B"] = max(basket["B"] - (basket["E"] // 2), 0)
+
+    # work on the F offer here
+    if "F" in basket:
+        if basket["F"] >= 3:
+            basket["F"] = max(basket["F"] - (basket["F"] // 2), 0)
 
     # apply offers here
     for sku, amount in basket.items():
