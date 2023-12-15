@@ -22,7 +22,7 @@ def checkout(skus: str) -> int:
             for offer in offers[sku]:
                 if len(offer) == 3:  # special offer "buy x get y free"
                     offer_amount, _, free_sku = offer
-                    basket[free_sku] = max(basket[free_sku] - (basket[offer] // offer_amount), 0)
+                    basket[free_sku] = max(basket[free_sku] - (basket[sku] // offer_amount), 0)
                 else:  # regular offer "buy x for y price"
                     offer_amount, offer_price = offer
                     while amount >= offer_amount:
@@ -42,6 +42,7 @@ def initialise_basket(prices: dict, offers: dict):
     sorted_basket = {sku: basket[sku] for sku in sorted_keys}
 
     return sorted_basket
+
 
 
 
