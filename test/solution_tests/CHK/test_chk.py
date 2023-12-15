@@ -30,5 +30,10 @@ class TestChk():
         assert checkout_solution.checkout("FFFFFF") == 40
     def test_new_offer(self):
         assert checkout_solution.checkout("SXYZ") == 62
+    def test_failed_new_offer(self):
+        assert checkout_solution.checkout("SSS") == 45
+        assert checkout_solution.checkout("SSSZ") == 65
+        assert checkout_solution.checkout("ZZZ") == 45
+
 
 

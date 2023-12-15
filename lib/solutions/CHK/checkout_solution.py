@@ -28,13 +28,16 @@ def checkout(skus: str) -> int:
     while count >= 3:
         # Find the three most expensive items that are part of the offer
         offer_items = []
+        used_items = set()  # Keep track of the items used in this offer
         for item in special_offer_items:
-            if item in basket and basket[item] > 0 and len(offer_items) < 3:
+            if item in basket and basket[item] > 0 and len(offer_items) < 3 and item not in used_items:
                 offer_items.append(item)
+                used_items.add(item)
                 basket[item] -= 1
         # Add the offer price to the total
         total_price += 45  # Price of the special offer
         count = sum(basket.get(item, 0) for item in special_offer_items)
+
 
     # apply offers here
     for sku, amount in basket.items():
@@ -62,6 +65,7 @@ def initialise_basket(prices: dict, offers: dict):
     sorted_basket = {sku: basket[sku] for sku in sorted_keys}
 
     return sorted_basket
+
 
 
 
