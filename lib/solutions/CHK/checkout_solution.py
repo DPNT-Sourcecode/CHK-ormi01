@@ -3,11 +3,11 @@
 # skus = unicode string
 def checkout(skus: str) -> int:
     # define prices and offers
-    prices: dict = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10}
-    offers: dict = {"A": [(5, 200), (3, 130)], "B": [(2, 45)], "E": [(2, 0, "B")]}
+    prices: dict = {"A": 50, "E": 40, "B": 30, "C": 20, "D": 15, "F": 10}
+    offers: dict = {"A": [(5, 200), (3, 130)], "E": [(2, 0, "B")], "B": [(2, 45)], "F": [(3, 20)]}
 
     # initialise basket and the total price
-    basket: dict = {}
+    basket: dict = {sku: 0 for sku in prices}
     total_price: int = 0
 
     # count items in basket
@@ -16,23 +16,20 @@ def checkout(skus: str) -> int:
             return -1 # invalid input
         basket[sku] = 1 if sku not in basket else basket[sku] + 1
 
-    # add 2E->1B offer before any other offer on B is applied
-    # can be proven by induction that 2E->1B > 2B->45
-    if "B" in basket and "E" in basket:
-        basket["B"] = max(basket["B"] - (basket["E"] // 2), 0)
-
-    # work on the F offer here
-    if "F" in basket:
-        if basket["F"] >= 3:
-            basket["F"] = (basket["F"] // 3) * 2 + (basket["F"] % 3)
-
     # apply offers here
     for sku, amount in basket.items():
         if sku in offers:
-            for offer_amount, offer_price in offers[sku]:
-                while amount >= offer_amount:
-                    total_price += offer_price
-                    amount -= offer_amount
+            for offer in sorted(offers[sku], reverse=True):
+                if len(offer) == 3:  # special offer "buy x get y free"
+                    offer_amount, _, free_sku = offer
+                    while amount >= offer_amount and basket.get(free_sku, 0) > 0:
+                        amount -= offer_amount
+                        basket[free_sku] -= 1
+                else:  # regular offer "buy x for y price"
+                    offer_amount, offer_price = offer
+                    while amount >= offer_amount:
+                        total_price += offer_price
+                        amount -= offer_amount
         total_price += amount * prices[sku]
 
     return total_price
