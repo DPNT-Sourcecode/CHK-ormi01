@@ -3,11 +3,11 @@
 # skus = unicode string
 def checkout(skus: str) -> int:
     # define prices and offers
-    prices: dict = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10}
+    prices: dict = {"A": 50, "E": 40, "B": 30, "C": 20, "D": 15, "F": 10}
     offers: dict = {"A": [(5, 200), (3, 130)], "E": [(2, 0, "B")], "B": [(2, 45)], "F": [(3, 20)]}
 
     # initialise basket and the total price
-    basket: dict = {}
+    basket: dict = {sku: 0 for sku in prices}
     total_price: int = 0
 
     # count items in basket
@@ -31,5 +31,6 @@ def checkout(skus: str) -> int:
         total_price += amount * prices[sku]
 
     return total_price
+
 
 
