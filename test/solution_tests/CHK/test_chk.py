@@ -21,3 +21,7 @@ class TestChk():
         assert checkout_solution.checkout("BEE") == 80
     def test_two_for_one_double(self):
         assert checkout_solution.checkout("BBEEEE") == 160
+    def test_f_offer_less_than_3_items(self):
+        assert checkout_solution.checkout("FF") == 20
+    def test_f_offer_3_items(self):
+        assert checkout_solution.checkout("FFF") == 20
