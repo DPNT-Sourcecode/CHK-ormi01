@@ -21,6 +21,22 @@ def checkout(skus: str) -> int:
             return -1 # invalid input
         basket[sku] += 1
 
+    # want to work on the new any 3 of (S,T,X,Y,Z) for 45  offer
+    # want to work from expensive to cheap (e.g. [XSTZ] = X + 45)
+    special_offer_items = sorted(["S","T","X","Y","Z"], key=lambda x: prices[x])
+    count = sum(item in special_offer_items for item in basket)
+    while count >= 3:
+    # Find the three most expensive items that are part of the offer
+        offer_items = []
+        for item in special_offer_items:
+            if item in basket and len(offer_items) < 3:
+                offer_items.append(item)
+                basket[item] -= 1
+        # Subtract the offer savings from the total
+        total_price -= sum(prices[item] for item in offer_items) - 45
+        count = sum(item in special_offer_items for item in basket)
+    
+
     # apply offers here
     for sku, amount in basket.items():
         if sku in offers:
@@ -47,4 +63,5 @@ def initialise_basket(prices: dict, offers: dict):
     sorted_basket = {sku: basket[sku] for sku in sorted_keys}
 
     return sorted_basket
+
 
